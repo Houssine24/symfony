@@ -1,0 +1,44 @@
+.formulaire {
+	 margin: 1em auto;
+	 max-width: 800px;
+	 width: 95%;
+	 font: 18px/1.5 sans-serif;
+	 text-align: center;
+}
+
+.example-wrapper {
+	 margin: 1em auto;
+	 max-width: 800px;
+	 width: 95%;
+	 font: 18px/1.5 sans-serif;
+}
+
+.element { 
+	border: 1px solid; text-align: center;
+}
+
+.img_article { 
+	height: 30%; width: 30%;
+}
+
+h2 { 
+	text-align: center;
+}
+
+.poster {
+	font-weight: bold; 
+}
+
+.comment {
+	border: 1px solid;
+	text-align: center;
+	margin-bottom: 5%;
+}
+
+.espace{
+	margin-bottom: 5%;
+}
+
+.btn{
+	margin-top: 5%;
+}

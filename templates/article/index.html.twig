@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+{% endblock %}    
+
+{% block body %}
+	<div class="ajoutArticle">
+		<form method="get" action="http://127.0.0.1:8000/article/new">
+			<button type="submit" class="btn btn-success">Ajouter un article</button>
+		</form>
+		<h2>Articles</h2>
+	</div>
+
+	<div class="example-wrapper">
+		{% for ar in Article %}
+			<div class="espace"></div>
+			<div class="element">
+				<img class="img_article" src="{{ar.imageArticle}}">
+				<h3>{{ar.titreArticle}}</h3>
+				<p>{{ar.contenuArticle}}</p>
+				<div class="espace"></div>
+				<div class="voirCommentaire">
+					<form method="get" action="http://127.0.0.1:8000/commentaire">
+						<button type="submit">Voir les commentaires</button>
+					</form>
+				</div>
+				<div class="espace"></div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

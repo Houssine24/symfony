@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block s %}{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block body %}
+
+	<div class="formulaire">
+		<h3>Formulaire</h3>
+		<div>
+		 	{{ form(form) }}
+		</div>
+	</div>	
+
+{% endblock %}
