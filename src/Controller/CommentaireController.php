@@ -90,6 +90,58 @@ class CommentaireController extends AbstractController
           'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @Route("/commentaire/newSousCom", name="newSousCom")
+     */
+
+    public function addSousCommentaire(Request $request)
+    {
+        $commentaire = $_GET['commentaire_id'];
+
+        $comm = $this->getDoctrine()
+        ->getRepository('App:Commentaire')
+        ->findOneBy([
+            "id" => $commentaire
+        ]);
+
+        $sousCom = new Commentaire();
+        $form = $this->get('form.factory')->createBuilder(FormType::class, $sousCom)
+        ->add('contenuCommentaire', TextareaType::class)
+        ->add('createdAt', DateType::class)
+        ->add('createdAt', DateType::class)
+        ->add('fkSousCommentaire', EntityType::class, array(
+            'class' => 'App:Commentaire',
+            'data' => $comm,
+        ))
+        ->add('valider', SubmitType::class)
+        ->getForm();
+
+        // Si la requête est en POST
+        if($request->isMethod('POST')) {
+            // On fait le lien Requête <-> Formulaire
+            // À partir de maintenant, la variable $sousCom contient les valeurs entrées dans le formulaire par le visiteur
+            $form->handleRequest($request);
+            // On vérifie que les valeurs entrées sont correctes
+            if ($form->isValid()) {
+                // On enregistre notre objet $article dans la base de données, par exemple
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($sousCom);
+                $em->flush();
+
+                $request->getSession()->getFlashBag()->add('notice', 'Sous Commentaire bien enregistrée.');
+
+                // On redirige vers la page de visualisation de l'annonce nouvellement créée
+                return $this->redirectToRoute('commentaire', array('id' => $sousCom->getId()));
+            }
+        }
+
+        // On passe la méthode createView() du formulaire à la vue
+        // afin qu'elle puisse afficher le formulaire toute seule
+        return $this->render('commentaire/newSousCom.html.twig', array(
+          'form' => $form->createView(),
+        ));
+    }
    
     
 }

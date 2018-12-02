@@ -13,57 +13,65 @@
 {% endblock %}
 
 {% block body %}
-	<div class="ajoutArticle">
-		<form method="get" action="http://127.0.0.1:8000/article/new">
-			<button type="submit" class="btn btn-success">Ajouter un article</button>
+	<nav class="navbar navbar-dark bg-dark ajoutArticle">
+		<form class="form-inline" method="get" action="http://127.0.0.1:8000">
+			<button type="submit" class="btn btn-outline-success">Retour aux articles</button>
 		</form>
-		<h2>Articles</h2>
-	</div>
-
-	<div class="example-wrapper">
+		<form class="form-inline" method="get" action="http://127.0.0.1:8000/article/new">
+			<button type="submit" class="btn btn-outline-success">Ajouter un article</button>
+		</form>
+		<span class="navbar-brand mb-0 h1 titlePage">Commentaires</span>
+	</nav>
+	<div class="card-header">Articles / Commentaire</div>
+	<div class="espace"></div>
+	<div class="card bg-light mb-3">
 		{% for ar in Article %}
-
 			<div class="espace"></div>
-
-			<div class="comment">
-
+			<div class="card-body">
 				<div class="espace"></div>
-
-				<img class="img_article" src="{{ar.imageArticle}}">
-
+				<img class="mt-0 mb-1 img_article" src="{{ar.imageArticle}}">
+				<h3 class="card-title">{{ar.titreArticle}}</h3>
+				<div class="card-text">	
+					<p>{{ar.contenuArticle}}</p>
+				</div>
 				<div class="espace"></div>
-
-				<h3>{{ar.titreArticle}}</h3>
-				<p>{{ar.contenuArticle}}</p>
-
-				<div class="espace"></div>
-
 				<div class="ajouterCommentaire">
 					<form method="get" action="http://127.0.0.1:8000/commentaire/newCom">
     					<input type="hidden" name="article_id" value="{{ ar.id }}">
-    					<button type="submit">commenter cet article</button>
+    					<button type="submit" class="btn btn-secondary">commenter cet article</button>
 					</form>
 				</div>
-
 				<div class="espace"></div>
-
-			</div>
-			{% for com in Commentaire %}
-				{% if com.Article == ar %}
-					<h2>Commentaires </h2>
-					<div class="element">			
-						<p class="poster">Posté le : {{com.createdAt |date("d/m/Y")}}</p>
-						<p>{{com.contenuCommentaire}}</p>
-						<hr>
-						{% for i in Commentaire %}
-							{% if i.fkSousCommentaire == com %}	
-								<p class="poster">Posté le : {{i.createdAt |date("d/m/Y")}}</p>
-								<p>{{i.contenuCommentaire}}</p>
-							{% endif %}	
-						{% endfor %}
-					</div>
-				{% endif %}
-			{% endfor %}
+				
+				<div class="card-footer">
+				{% for com in Commentaire %}
+					{% if com.Article == ar %}	
+						<div class="comment">
+							<div class="espace"></div>
+							<h4>Commentaires ({{ com.id|length }})</h4>
+							<div class="espace"></div>
+							<p class="texteGras">{{com.createdAt |date("d/m/Y")}} :</p>
+							<h5>{{com.contenuCommentaire}}</h5>
+							<div class="ajouterSousCommentaire">
+								<form method="get" action="http://127.0.0.1:8000/commentaire/newSousCom">
+					    			<input type="hidden" name="commentaire_id" value="{{ com.id }}">
+					    			<button type="submit" class="btn btn-success">Réagir à ce commentaire</button>
+								</form>
+							</div>
+							<div class="espace"></div>
+							{% for i in Commentaire %}
+								{% if i.fkSousCommentaire == com %}	
+									<p class="texteGras">Réponse : {{i.createdAt |date("d/m/Y")}}</p>
+									<p>{{i.contenuCommentaire}}</p>
+									<hr>
+								{% endif %}	
+							{% endfor %}
+							<div class="espace"></div>
+							</div>
+					{% endif %}
+				{% endfor %}
+						</div>
+			</div>		
 		{% endfor %}
 	</div>
 {% endblock %}

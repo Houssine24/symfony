@@ -21,6 +21,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="article")
      */
+
     public function index()
     {
     	$Article = $this->getDoctrine()
@@ -29,6 +30,7 @@ class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', [
             'Article' => $Article,
         ]);
+
     }
 
     /**

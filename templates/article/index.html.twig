@@ -13,24 +13,30 @@
 {% endblock %}    
 
 {% block body %}
-	<div class="ajoutArticle">
-		<form method="get" action="http://127.0.0.1:8000/article/new">
-			<button type="submit" class="btn btn-success">Ajouter un article</button>
+	<nav class="navbar navbar-dark bg-dark ajoutArticle">
+		<form class="form-inline" method="get" action="http://127.0.0.1:8000/article/new">
+			<button type="submit" class="btn btn-outline-success">Ajouter un article</button>
 		</form>
-		<h2>Articles</h2>
-	</div>
-
-	<div class="example-wrapper">
+		<span class="navbar-brand mb-0 h1 titlePage">Forum</span>
+	</nav>
+	<div class="card-header">Articles</div>
+	<div class="espace"></div>
+	<div class="card bg-light mb-3">
 		{% for ar in Article %}
 			<div class="espace"></div>
-			<div class="element">
-				<img class="img_article" src="{{ar.imageArticle}}">
-				<h3>{{ar.titreArticle}}</h3>
-				<p>{{ar.contenuArticle}}</p>
+			<div class="card-body">
+				<img class="mt-0 mb-1 img_article" src="{{ar.imageArticle}}">
+				<h3 class="card-title">{{ar.titreArticle}}</h3>
+				<div class="card-text">	
+					<p>{{ar.contenuArticle}}</p>
+				</div>
+				<div class="card-footer">
+					<small class="text-muted">{{ar.createdAt |date("d/m/Y")}}</small>
+				</div>	
 				<div class="espace"></div>
 				<div class="voirCommentaire">
 					<form method="get" action="http://127.0.0.1:8000/commentaire">
-						<button type="submit">Voir les commentaires</button>
+						<button type="submit" class="btn btn-secondary">Voir les commentaires</button>
 					</form>
 				</div>
 				<div class="espace"></div>

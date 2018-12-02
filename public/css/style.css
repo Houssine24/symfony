@@ -6,39 +6,34 @@
 	 text-align: center;
 }
 
-.example-wrapper {
-	 margin: 1em auto;
-	 max-width: 800px;
-	 width: 95%;
-	 font: 18px/1.5 sans-serif;
-}
-
-.element { 
-	border: 1px solid; text-align: center;
-}
-
 .img_article { 
-	height: 30%; width: 30%;
+	height: 20%; width: 20%;
 }
 
-h2 { 
-	text-align: center;
-}
-
-.poster {
+.texteGras {
 	font-weight: bold; 
-}
-
-.comment {
-	border: 1px solid;
-	text-align: center;
-	margin-bottom: 5%;
 }
 
 .espace{
 	margin-bottom: 5%;
 }
 
-.btn{
-	margin-top: 5%;
+.media {
+	width: 60rem;
+	display: inline-block;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.comment{
+	text-align: center;
+}
+
+.formulaire{
+	margin-top: 5%
+}
+
+.card{
+	max-width: 70rem;
+	margin-left: 10%;
 }
